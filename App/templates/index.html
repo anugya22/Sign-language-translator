@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sign Language Detection</h1>
+        </header>
+        <main>
+            <div class="button-group">
+                <button id="start" onclick="startDetection()">Start Detection</button>
+                <button id="stop" onclick="stopDetection()" style="display: none;">Stop Detection</button>
+            </div>
+            <div id="video-container" class="video-container" style="display: none;">
+                <img id="video-feed" src="/video_feed" alt="Live Video Feed">
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 Sign Language Detection. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <script>
+        function startDetection() {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("stop").style.display = "inline-block";
+            document.getElementById("video-container").style.display = "flex";
+        }
+
+        function stopDetection() {
+            document.getElementById("start").style.display = "inline-block";
+            document.getElementById("stop").style.display = "none";
+            document.getElementById("video-container").style.display = "none";
+            fetch('/stop_feed');  // Call stop_feed endpoint
+        }
+    </script>
+</body>
+</html>
